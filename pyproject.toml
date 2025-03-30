@@ -1,0 +1,19 @@
+[project]
+name = "avent-ai-sales-rep"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "liviaellen",email = "38367623+liviaellen@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "avent_ai_sales_rep", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
