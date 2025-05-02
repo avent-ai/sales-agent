@@ -24,13 +24,6 @@ type Message = {
   id: string;
   text: string;
   sender: 'user' | 'bot';
-  sentiment?: {
-    label: string;
-    score: number;
-    positive_prob: number;
-    neutral_prob: number;
-    negative_prob: number;
-  };
   thinkingProcess?: {
     conversationalStage: string,
     useTools: boolean,
@@ -41,34 +34,6 @@ type Message = {
   };
 };
 
-// Sentiment Analysis API function
-async function analyzeSentiment(text: string) {
-  try {
-    const response = await fetch('http://localhost:5001/analyze', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ text: text })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Sentiment API error: ${response.statusText}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error analyzing sentiment:', error);
-    // Fallback if API is not available
-    return {
-      label: "neutral",
-      score: 0.6,
-      positive_prob: 0.2,
-      neutral_prob: 0.6,
-      negative_prob: 0.2
-    };
-  }
-}
 
 export function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -91,7 +56,6 @@ export function ChatInterface() {
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const thinkingProcessEndRef = useRef<null | HTMLDivElement>(null);
   const [botHasResponded, setBotHasResponded] = useState(false);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -172,27 +136,12 @@ export function ChatInterface() {
     setInputValue(e.target.value);
   };
 
-  // Updated to include sentiment analysis
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (!inputValue.trim()) return;
-
-    // Analyze sentiment
-    const sentiment = await analyzeSentiment(inputValue);
-    console.log('Sentiment analysis:', sentiment);
-
-    // Add user message with sentiment information
     const userMessage = `${inputValue}`;
-    const updatedMessages = [...messages, {
-      id: uuidv4(),
-      text: userMessage,
-      sender: 'user' as 'user',
-      sentiment: sentiment
-    }];
-
+    const updatedMessages = [...messages, { id: uuidv4(), text: userMessage, sender: 'user' as 'user' }];
     setMessages(updatedMessages);
-
-    // Send to backend with sentiment information
-    handleBotResponse(inputValue, sentiment);
+    handleBotResponse(inputValue);
     setInputValue('');
   };
 
@@ -202,26 +151,21 @@ export function ChatInterface() {
     console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
   }, []);
 
-  // Updated to include sentiment analysis
-  const handleBotResponse = async (userMessage: string, sentiment: any) => {
+
+  const handleBotResponse = async (userMessage: string) => {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production" && client) {
       client.capture({
         distinctId: session_id,
         event: 'sent-message',
         properties: {
           $current_url: window.location.href,
-          sentiment: sentiment.label,
-          sentiment_score: sentiment.score
         },
       });
     }
 
-    // Include sentiment in the message
-    const enhancedMessage = `[Sentiment: ${sentiment.label}] ${userMessage}`;
-
     const requestData = {
       session_id,
-      human_say: enhancedMessage, // Use the enhanced message with sentiment
+      human_say: userMessage,
       stream,
     };
     setIsBotTyping(true); // Start showing the typing indicator
@@ -273,20 +217,11 @@ export function ChatInterface() {
       setBotHasResponded(true);
     }
   };
-
-  // Added CSS for sentiment visualization
-  const sentimentBarStyle = {
-    height: '5px',
-    borderRadius: '5px',
-    marginRight: '5px',
-    display: 'inline-block'
-  };
-
   return (
     <div key="1" className="flex flex-col " style={{ height: '89vh' }}>
       <header className="flex items-center justify-center h-16 bg-gray-900 text-white">
         <BotIcon className="animate-wave h-7 w-6 mr-2" />
-        <h1 className="text-2xl font-bold">Sally - Sales Buddy with Sentiment Analysis</h1>
+        <h1 className="text-2xl font-bold">SallySalesBuddy</h1>
       </header>
       <main className="flex flex-row justify-center items-start bg-gray-100 dark:bg-gray-900 p-4" >
         <div className="flex flex-col w-1/2 h-full bg-white rounded-lg shadow-md p-4 mr-4 chat-messages" style={{maxHeight}}>
@@ -300,30 +235,9 @@ export function ChatInterface() {
     {message.sender === 'user' ? (
       <>
         <span role="img" aria-label="User" className="mr-2">👤</span>
-        <div className="flex flex-col">
-          <span className={`text-frame p-2 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-900`}>
-            {message.text}
-          </span>
-
-          {/* Display sentiment for user messages */}
-          {message.sentiment && (
-            <div className="mt-1 text-xs text-gray-600">
-              <div>Detected sentiment: {message.sentiment.label} ({Math.round(message.sentiment.score * 100)}% confidence)</div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.positive_prob * 100)}px`, backgroundColor: '#28a745'}}></div>
-                <span className="text-xs">Positive</span>
-              </div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.neutral_prob * 100)}px`, backgroundColor: '#6c757d'}}></div>
-                <span className="text-xs">Neutral</span>
-              </div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.negative_prob * 100)}px`, backgroundColor: '#dc3545'}}></div>
-                <span className="text-xs">Negative</span>
-              </div>
-            </div>
-          )}
-        </div>
+        <span className={`text-frame p-2 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-900`}>
+          {message.text}
+        </span>
       </>
     ) : (
 
@@ -384,7 +298,7 @@ export function ChatInterface() {
         <div className="flex flex-col w-1/2 h-full bg-white rounded-lg shadow-md p-4 thinking-process" style={{maxHeight}}>
   <div className="flex items-center mb-4">
     <BotIcon className="h-6 w-6 text-gray-500 mr-2" />
-    <h2 className="text-lg font-semibold">AI Sales Agent {botName} Thought Process</h2>
+    <h2 className="text-lg font-semibold">AI {botName} Thought Process</h2>
   </div>
   <div className={`flex-1 overflow-y-auto hide-scroll ${styles.hideScrollbar}`} style={{ overflowX: 'hidden' }}>
             <div>
