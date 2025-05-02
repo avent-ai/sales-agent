@@ -1,7 +1,7 @@
-salesgpt.tools module
+SallySalesBuddy.tools module
 =====================
 
-.. automodule:: salesgpt.tools
+.. automodule:: SallySalesBuddy.tools
    :members:
    :undoc-members:
    :show-inheritance:

@@ -5,11 +5,11 @@ import re
 from langchain_community.chat_models import BedrockChat, ChatLiteLLM
 from langchain_openai import ChatOpenAI
 
-from salesgpt.agents import SalesGPT
-from salesgpt.models import BedrockCustomModel
+from SallySalesBuddy.agents import SallySalesBuddy
+from SallySalesBuddy.models import BedrockCustomModel
 
 
-class SalesGPTAPI:
+class SallySalesBuddyAPI:
     def __init__(
         self,
         config_path: str,
@@ -53,15 +53,15 @@ class SalesGPTAPI:
                 {
                     "use_tools": True,
                     "product_catalog": self.product_catalog,
-                    "salesperson_name": "Ted Lasso"
+                    "salesperson_name": "Sally Sales Buddy"
                     if not self.config_path
-                    else config.get("salesperson_name", "Ted Lasso"),
+                    else config.get("salesperson_name", "Sally Sales Buddy"),
                 }
             )
 
-        sales_agent = SalesGPT.from_llm(self.llm, **config)
+        sales_agent = SallySalesBuddy.from_llm(self.llm, **config)
 
-        print(f"SalesGPT use_tools: {sales_agent.use_tools}")
+        print(f"SallySalesBuddy use_tools: {sales_agent.use_tools}")
         sales_agent.seed_agent()
         return sales_agent
 
@@ -84,7 +84,7 @@ class SalesGPTAPI:
         if self.verbose:
             print("=" * 10)
             print(f"AI LOG {ai_log}")
-            
+
         if (
             self.sales_agent.conversation_history
             and "<END_OF_CALL>" in self.sales_agent.conversation_history[-1]
@@ -103,11 +103,11 @@ class SalesGPTAPI:
         #print("AI LOG INTERMEDIATE STEPS: ", ai_log["intermediate_steps"])
 
         if (
-            self.use_tools and 
-            "intermediate_steps" in ai_log and 
+            self.use_tools and
+            "intermediate_steps" in ai_log and
             len(ai_log["intermediate_steps"]) > 0
         ):
-            
+
             try:
                 res_str = ai_log["intermediate_steps"][0]
                 print("RES STR: ", res_str)

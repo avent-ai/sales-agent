@@ -13,12 +13,12 @@ default: test
 
 test:	## run tests with pytest.
 	@echo "Running tests..."
-	@pytest --cov=salesgpt --cov-report=term-missing --cov-report=html
+	@pytest --cov=SallySalesBuddy --cov-report=term-missing --cov-report=html
 	@echo "Tests executed."
 
-test_tools: 
+test_tools:
 	@echo "Running tests in tests/test_tools.py..."
-	@pytest tests/test_tools.py --cov=salesgpt --cov-report=term-missing --cov-report=html
+	@pytest tests/test_tools.py --cov=SallySalesBuddy --cov-report=term-missing --cov-report=html
 	@echo "Tests in tests/test_tools.py executed."
 
 
@@ -35,7 +35,7 @@ setup:
 clean:
 	@echo "Cleaning up..."
 	rm -rf $(VENV)
-	rm -rf SalesGPT
+	rm -rf SallySalesBuddy
 	@echo "Environment cleaned up."
 
 .PHONY: default setup test clean

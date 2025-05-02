@@ -1,93 +1,93 @@
-salesgpt package
+SallySalesBuddy package
 ================
 
 Submodules
 ----------
 
-salesgpt.agents module
+SallySalesBuddy.agents module
 ----------------------
 
-.. automodule:: salesgpt.agents
+.. automodule:: SallySalesBuddy.agents
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.chains module
+SallySalesBuddy.chains module
 ----------------------
 
-.. automodule:: salesgpt.chains
+.. automodule:: SallySalesBuddy.chains
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.logger module
+SallySalesBuddy.logger module
 ----------------------
 
-.. automodule:: salesgpt.logger
+.. automodule:: SallySalesBuddy.logger
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.parsers module
+SallySalesBuddy.parsers module
 -----------------------
 
-.. automodule:: salesgpt.parsers
+.. automodule:: SallySalesBuddy.parsers
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.prompts module
+SallySalesBuddy.prompts module
 -----------------------
 
-.. automodule:: salesgpt.prompts
+.. automodule:: SallySalesBuddy.prompts
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.prompts\_cn module
+SallySalesBuddy.prompts\_cn module
 ---------------------------
 
-.. automodule:: salesgpt.prompts_cn
+.. automodule:: SallySalesBuddy.prompts_cn
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.salesgptapi module
+SallySalesBuddy.SallySalesBuddyapi module
 ---------------------------
 
-.. automodule:: salesgpt.salesgptapi
+.. automodule:: SallySalesBuddy.SallySalesBuddyapi
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.stages module
+SallySalesBuddy.stages module
 ----------------------
 
-.. automodule:: salesgpt.stages
+.. automodule:: SallySalesBuddy.stages
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.templates module
+SallySalesBuddy.templates module
 -------------------------
 
-.. automodule:: salesgpt.templates
+.. automodule:: SallySalesBuddy.templates
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.tools module
+SallySalesBuddy.tools module
 ---------------------
 
-.. automodule:: salesgpt.tools
+.. automodule:: SallySalesBuddy.tools
    :members:
    :undoc-members:
    :show-inheritance:
 
-salesgpt.version module
+SallySalesBuddy.version module
 -----------------------
 
-.. automodule:: salesgpt.version
+.. automodule:: SallySalesBuddy.version
    :members:
    :undoc-members:
    :show-inheritance:
@@ -95,7 +95,7 @@ salesgpt.version module
 Module contents
 ---------------
 
-.. automodule:: salesgpt
+.. automodule:: SallySalesBuddy
    :members:
    :undoc-members:
    :show-inheritance:

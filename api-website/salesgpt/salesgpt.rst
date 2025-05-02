@@ -1,4 +1,4 @@
-salesgpt package
+SallySalesBuddy package
 ================
 
 Submodules
@@ -8,22 +8,22 @@ Submodules
    :maxdepth: 4
    :caption: Contents:
 
-   salesgpt.agents
-   salesgpt.chains
-   salesgpt.logger
-   salesgpt.parsers
-   salesgpt.prompts
-   salesgpt.prompts_cn
-   salesgpt.salesgptapi
-   salesgpt.stages
-   salesgpt.templates
-   salesgpt.tools
-   salesgpt.version
+   SallySalesBuddy.agents
+   SallySalesBuddy.chains
+   SallySalesBuddy.logger
+   SallySalesBuddy.parsers
+   SallySalesBuddy.prompts
+   SallySalesBuddy.prompts_cn
+   SallySalesBuddy.SallySalesBuddyapi
+   SallySalesBuddy.stages
+   SallySalesBuddy.templates
+   SallySalesBuddy.tools
+   SallySalesBuddy.version
 
 Module contents
 ---------------
 
-.. automodule:: salesgpt
+.. automodule:: SallySalesBuddy
    :members:
    :undoc-members:
    :show-inheritance:

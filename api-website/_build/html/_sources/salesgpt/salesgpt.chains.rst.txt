@@ -1,7 +1,7 @@
-salesgpt.chains module
+SallySalesBuddy.chains module
 ======================
 
-.. automodule:: salesgpt.chains
+.. automodule:: SallySalesBuddy.chains
    :members:
    :undoc-members:
    :show-inheritance:

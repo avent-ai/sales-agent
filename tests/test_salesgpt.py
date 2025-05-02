@@ -5,9 +5,9 @@ from unittest.mock import patch
 import pytest
 from dotenv import load_dotenv
 from langchain_community.chat_models import ChatLiteLLM
-from salesgpt.models import BedrockCustomModel
+from SallySalesBuddy.models import BedrockCustomModel
 
-from salesgpt.agents import SalesGPT
+from SallySalesBuddy.agents import SallySalesBuddy
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
 load_dotenv(dotenv_path)
@@ -16,7 +16,7 @@ load_dotenv(dotenv_path)
 MOCK_RESPONSE = {
     "choices": [
         {
-            "text": "Ted Lasso: Hey, good morning! This is a mock response to test when you don't have access to LLM API gods. <END_OF_TURN>"
+            "text": "Sally Sales Buddy: Hey, good morning! This is a mock response to test when you don't have access to LLM API gods. <END_OF_TURN>"
         }
     ]
 }
@@ -29,7 +29,7 @@ MOCK_STREAM_RESPONSE = [
 ]
 
 
-class TestSalesGPT:
+class TestSallySalesBuddy:
     @pytest.fixture(autouse=True)
     def load_env(self):
         # Setup for each test
@@ -44,28 +44,22 @@ class TestSalesGPT:
 
         llm = ChatLiteLLM(temperature=0.9, model="gpt-4-0125-preview")
 
-        sales_agent = SalesGPT.from_llm(
+        sales_agent = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
             use_tools=False,
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven 
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible. 
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories 
-                                    that are designed to meet the unique 
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+        ,
         )
 
         sales_agent.seed_agent()
         sales_agent.determine_conversation_stage()
 
         if use_mock_api:
-            with patch("salesgpt.agents.SalesGPT._call", return_value=MOCK_RESPONSE):
+            with patch("SallySalesBuddy.agents.SallySalesBuddy._call", return_value=MOCK_RESPONSE):
                 sales_agent.step()
                 output = MOCK_RESPONSE["choices"][0]["text"]
                 sales_agent.conversation_history.append(output)
@@ -101,23 +95,16 @@ class TestSalesGPT:
 
         data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_data")
 
-        sales_agent = SalesGPT.from_llm(
+        sales_agent = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
             use_tools="True",
             product_catalog=f"{data_dir}/sample_product_catalog.txt",
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven 
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible. 
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories 
-                                    that are designed to meet the unique 
-                                    needs of our customers.""",
-        )
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+        ,)
 
         sales_agent.seed_agent()
         sales_agent.determine_conversation_stage()  # optional for demonstration, built into the prompt
@@ -133,27 +120,21 @@ class TestSalesGPT:
     def test_valid_inference_with_tools_anthropic(self, load_env):
         """Test that the agent will start and generate the first utterance."""
 
-        
+
         llm = BedrockCustomModel(type='bedrock-model', model="anthropic.claude-3-sonnet-20240229-v1:0", system_prompt="You are a helpful assistant.")
 
         data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_data")
 
-        sales_agent = SalesGPT.from_llm(
+        sales_agent = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
             use_tools="True",
             product_catalog=f"{data_dir}/sample_product_catalog.txt",
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven 
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible. 
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories 
-                                    that are designed to meet the unique 
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+
         )
 
         sales_agent.seed_agent()
@@ -173,20 +154,14 @@ class TestSalesGPT:
 
         llm = ChatLiteLLM(temperature=0.9)
 
-        sales_agent = SalesGPT.from_llm(
+        sales_agent = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven 
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible. 
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories 
-                                    that are designed to meet the unique 
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+
         )
 
         sales_agent.seed_agent()
@@ -194,7 +169,7 @@ class TestSalesGPT:
 
         # agent output sample
         # if use_mock_api:
-        #     with patch('salesgpt.agents.SalesGPT._streaming_generator', return_value=iter(MOCK_STREAM_RESPONSE)):
+        #     with patch('SallySalesBuddy.agents.SallySalesBuddy._streaming_generator', return_value=iter(MOCK_STREAM_RESPONSE)):
         #         stream_generator = sales_agent.step(stream=True)
         #         agent_output = ""
         #         for chunk in stream_generator:
@@ -216,20 +191,14 @@ class TestSalesGPT:
         llm = ChatLiteLLM(temperature=0.9)
         model_name = "gpt-3.5-turbo"
 
-        sales_agent = SalesGPT.from_llm(
+        sales_agent = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven 
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible. 
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories 
-                                    that are designed to meet the unique 
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+
         )
 
         sales_agent.seed_agent()
@@ -255,24 +224,18 @@ class TestSalesGPT:
     def test_accept_json_or_args_config(self, load_env):
         llm = ChatLiteLLM()
 
-        sales_agent_passing_str = SalesGPT.from_llm(
+        sales_agent_passing_str = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
             use_tools="True",
             product_catalog="tests/test_data/sample_product_catalog.txt",
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible.
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories
-                                    that are designed to meet the unique
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+        ,
         )  # Passing use_tools="True" as arg
-        assert isinstance(sales_agent_passing_str, SalesGPT)
+        assert isinstance(sales_agent_passing_str, SallySalesBuddy)
         assert sales_agent_passing_str.seed_agent() is None
         output = sales_agent_passing_str.step()
 
@@ -297,24 +260,18 @@ class TestSalesGPT:
                 key in output.keys()
             ), f"Expected key {key} in output, got {output.keys()}"
 
-        sales_agent_passing_bool = SalesGPT.from_llm(
+        sales_agent_passing_bool = SallySalesBuddy.from_llm(
             llm,
             verbose=False,
             use_tools=True,
             product_catalog="tests/test_data/sample_product_catalog.txt",
-            salesperson_name="Ted Lasso",
+            salesperson_name="Sally Sales Buddy",
             salesperson_role="Sales Representative",
-            company_name="Sleep Haven",
-            company_business="""Sleep Haven
-                                    is a premium mattress company that provides
-                                    customers with the most comfortable and
-                                    supportive sleeping experience possible.
-                                    We offer a range of high-quality mattresses,
-                                    pillows, and bedding accessories
-                                    that are designed to meet the unique
-                                    needs of our customers.""",
+            company_name="SmileCraft Aligners",
+            company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
+        ,
         )  # Passing use_tools=True as arg
-        assert isinstance(sales_agent_passing_bool, SalesGPT)
+        assert isinstance(sales_agent_passing_bool, SallySalesBuddy)
         assert sales_agent_passing_bool.seed_agent() is None
 
         output = sales_agent_passing_bool.step()

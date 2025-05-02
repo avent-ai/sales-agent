@@ -26,24 +26,24 @@ Create a virtual environment at a location on your computer. We use the generic 
 
 To deactivate a virtual environment after you have stopped using it simply run: `deactivate`
 
-Clone the SalesGPT Github repository: 
+Clone the SallySalesBuddy Github repository:
 
-`git clone https://github.com/filip-michalsky/SalesGPT.git`
+`git clone https://github.com/filip-michalsky/SallySalesBuddy.git`
 
-Navigate to the repository and in case you used a different venv name rename the VENV variable in the Makefile: 
+Navigate to the repository and in case you used a different venv name rename the VENV variable in the Makefile:
 
-`cd SalesGPT`
+`cd SallySalesBuddy`
 
 
 
-If you simply want to work with SalesGPT as an end user without local changes you can install from PyPI using: 
+If you simply want to work with SallySalesBuddy as an end user without local changes you can install from PyPI using:
 
-`pip install salesgpt`
+`pip install SallySalesBuddy`
 
-If you want to work on your own version of SalesGPT or contribute to our open-source version install by activating your virtual environment as aforementioned and then run: 
+If you want to work on your own version of SallySalesBuddy or contribute to our open-source version install by activating your virtual environment as aforementioned and then run:
 
 `make setup`
 
 For more detailed installation steps along with the reasons for doing each please visit CONTRIBUTING.md
 
-Finally, for use of SalesGPT create an `.env` file just as our `.env.example` and put your API keys there by specifying a new line just as we have done.
+Finally, for use of SallySalesBuddy create an `.env` file just as our `.env.example` and put your API keys there by specifying a new line just as we have done.

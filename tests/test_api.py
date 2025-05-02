@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch, AsyncMock
 import pytest
 from dotenv import load_dotenv
 
-from salesgpt.salesgptapi import SalesGPTAPI
+from SallySalesBuddy.SallySalesBuddyapi import SallySalesBuddyAPI
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
 load_dotenv(dotenv_path)
@@ -13,42 +13,42 @@ from unittest.mock import patch
 
 
 @pytest.fixture
-def mock_salesgpt_step():
-    with patch("salesgpt.salesgptapi.SalesGPT.step") as mock_step:
+def mock_SallySalesBuddy_step():
+    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.step") as mock_step:
         mock_step.return_value = "Mock response"
         yield
 '''
 @pytest.fixture
-def mock_salesgpt_astep():
-    with patch("salesgpt.salesgptapi.SalesGPT.astep") as mock_step:
+def mock_SallySalesBuddy_astep():
+    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.astep") as mock_step:
         mock_step.return_value = "Mock response"
         yield
-'''     
+'''
 @pytest.fixture
-def mock_salesgpt_astep():
-    with patch("salesgpt.salesgptapi.SalesGPT.astep", new_callable=AsyncMock) as mock_step:
+def mock_SallySalesBuddy_astep():
+    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.astep", new_callable=AsyncMock) as mock_step:
         mock_step.return_value = AsyncMock(return_value={
             "response": "Mock response",
             "intermediate_steps": []  # Ensure this key is present
         })
         yield
 
-class TestSalesGPTAPI:
+class TestSallySalesBuddyAPI:
     def test_initialize_agent_with_tools(self):
-        api = SalesGPTAPI(config_path="", use_tools=True)
+        api = SallySalesBuddyAPI(config_path="", use_tools=True)
         assert (
             api.sales_agent.use_tools == True
-        ), "SalesGPTAPI should initialize SalesGPT with tools enabled."
+        ), "SallySalesBuddyAPI should initialize SallySalesBuddy with tools enabled."
 
     def test_initialize_agent_without_tools(self):
-        api = SalesGPTAPI(config_path="", use_tools=False)
+        api = SallySalesBuddyAPI(config_path="", use_tools=False)
         assert (
             api.sales_agent.use_tools == False
-        ), "SalesGPTAPI should initialize SalesGPT with tools disabled."
+        ), "SallySalesBuddyAPI should initialize SallySalesBuddy with tools disabled."
 
     @pytest.mark.asyncio
-    async def test_do_method_with_human_input(self, mock_salesgpt_astep):
-        api = SalesGPTAPI(config_path="", use_tools=False)
+    async def test_do_method_with_human_input(self, mock_SallySalesBuddy_astep):
+        api = SallySalesBuddyAPI(config_path="", use_tools=False)
         payload = await api.do(human_input="Hello")
         # TODO patch conversation_history to be able to check correctly
         print(payload)
@@ -60,8 +60,8 @@ class TestSalesGPTAPI:
         ), "The payload response should match the mock response. {}".format(payload)
 
     @pytest.mark.asyncio
-    async def test_do_method_with_human_input_anthropic(self, mock_salesgpt_astep):
-        api = SalesGPTAPI(config_path="", use_tools=False, model_name="anthropic.claude-3-sonnet-20240229-v1:0")
+    async def test_do_method_with_human_input_anthropic(self, mock_SallySalesBuddy_astep):
+        api = SallySalesBuddyAPI(config_path="", use_tools=False, model_name="anthropic.claude-3-sonnet-20240229-v1:0")
         payload = await api.do(human_input="Hello")
         assert (
             "User: Hello <END_OF_TURN>" in api.sales_agent.conversation_history
@@ -71,8 +71,8 @@ class TestSalesGPTAPI:
         ), "The payload response should match the mock response. {}".format(payload)
 
     @pytest.mark.asyncio
-    async def test_do_method_without_human_input(self, mock_salesgpt_astep):
-        api = SalesGPTAPI(config_path="", use_tools=False)
+    async def test_do_method_without_human_input(self, mock_SallySalesBuddy_astep):
+        api = SallySalesBuddyAPI(config_path="", use_tools=False)
         payload = await api.do()
         # TODO patch conversation_history to be able to check correctly
         assert (
@@ -81,13 +81,13 @@ class TestSalesGPTAPI:
 
     # @pytest.mark.asyncio
     # async def test_do_stream_method(self):
-    #     api = SalesGPTAPI(config_path="", use_tools=False)
+    #     api = SallySalesBuddyAPI(config_path="", use_tools=False)
     #     stream_gen = api.do_stream(conversation_history=[])
     #     async for response in stream_gen:
     #         assert response == "Agent: Mock response <END_OF_TURN>", "Stream generator should yield the mock response."
     @pytest.mark.asyncio
     async def test_payload_structure(self):
-        api = SalesGPTAPI(config_path="", use_tools=False)
+        api = SallySalesBuddyAPI(config_path="", use_tools=False)
         payload = await api.do(human_input="Test input")
         expected_keys = [
             "bot_name",
@@ -100,4 +100,3 @@ class TestSalesGPTAPI:
         ]
         for key in expected_keys:
             assert key in payload, f"Payload missing expected key: {key}"
-            

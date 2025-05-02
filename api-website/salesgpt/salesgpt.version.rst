@@ -1,7 +1,7 @@
-salesgpt.version module
+SallySalesBuddy.version module
 =======================
 
-.. automodule:: salesgpt.version
+.. automodule:: SallySalesBuddy.version
    :members:
    :undoc-members:
    :show-inheritance:

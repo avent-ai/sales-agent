@@ -17,14 +17,14 @@ from langchain_core.language_models.llms import create_base_retry_decorator
 from litellm import acompletion
 from pydantic import Field
 
-from salesgpt.chains import SalesConversationChain, StageAnalyzerChain
-from salesgpt.custom_invoke import CustomAgentExecutor
-from salesgpt.logger import time_logger
-from salesgpt.parsers import SalesConvoOutputParser
-from salesgpt.prompts import SALES_AGENT_TOOLS_PROMPT
-from salesgpt.stages import CONVERSATION_STAGES
-from salesgpt.templates import CustomPromptTemplateForTools
-from salesgpt.tools import get_tools, setup_knowledge_base
+from SallySalesBuddy.chains import SalesConversationChain, StageAnalyzerChain
+from SallySalesBuddy.custom_invoke import CustomAgentExecutor
+from SallySalesBuddy.logger import time_logger
+from SallySalesBuddy.parsers import SalesConvoOutputParser
+from SallySalesBuddy.prompts import SALES_AGENT_TOOLS_PROMPT
+from SallySalesBuddy.stages import CONVERSATION_STAGES
+from SallySalesBuddy.templates import CustomPromptTemplateForTools
+from SallySalesBuddy.tools import get_tools, setup_knowledge_base
 
 
 def _create_retry_decorator(llm: Any) -> Callable[[Any], Any]:
@@ -53,7 +53,7 @@ def _create_retry_decorator(llm: Any) -> Callable[[Any], Any]:
     return create_base_retry_decorator(error_types=errors, max_retries=llm.max_retries)
 
 
-class SalesGPT(Chain):
+class SallySalesBuddy(Chain):
     """Controller model for the Sales Agent."""
 
     conversation_history: List[str] = []
@@ -68,13 +68,14 @@ class SalesGPT(Chain):
     model_name: str = "gpt-4o"  # TODO - make this an env variable
 
     use_tools: bool = False
-    salesperson_name: str = "Ted Lasso"
-    salesperson_role: str = "Business Development Representative"
-    company_name: str = "Sleep Haven"
-    company_business: str = "Sleep Haven is a premium mattress company that provides customers with the most comfortable and supportive sleeping experience possible. We offer a range of high-quality mattresses, pillows, and bedding accessories that are designed to meet the unique needs of our customers."
-    company_values: str = "Our mission at Sleep Haven is to help people achieve a better night's sleep by providing them with the best possible sleep solutions. We believe that quality sleep is essential to overall health and well-being, and we are committed to helping our customers achieve optimal sleep by offering exceptional products and customer service."
-    conversation_purpose: str = "find out whether they are looking to achieve better sleep via buying a premier mattress."
+    salesperson_name: str = "Sally Sales Buddy"
+    salesperson_role: str = "Sales Representative"
+    company_name: str = "SmileCraft Aligners"
+    company_business: str = "SmileCraft Aligners provides custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Our aligners are designed using advanced 3D imaging technology and are tailored to each individual's dental profile, offering a modern, convenient alternative to traditional metal braces."
+    company_values: str = "At SmileCraft Aligners, we believe everyone deserves to feel confident in their smile. Our mission is to make orthodontic care more accessible, comfortable, and effective, while delivering lasting results and exceptional customer support."
+    conversation_purpose: str = "find out whether they are looking to improve their smile or correct dental alignment with clear aligners like Invisalign."
     conversation_type: str = "call"
+
 
     def retrieve_conversation_stage(self, key):
         """
@@ -540,9 +541,9 @@ class SalesGPT(Chain):
 
     @classmethod
     @time_logger
-    def from_llm(cls, llm: ChatLiteLLM, verbose: bool = False, **kwargs) -> "SalesGPT":
+    def from_llm(cls, llm: ChatLiteLLM, verbose: bool = False, **kwargs) -> "SallySalesBuddy":
         """
-        Class method to initialize the SalesGPT Controller from a given ChatLiteLLM instance.
+        Class method to initialize the SallySalesBuddy Controller from a given ChatLiteLLM instance.
 
         This method sets up the stage analyzer chain and sales conversation utterance chain. It also checks if custom prompts
         are to be used and if tools are to be set up for the agent. If tools are to be used, it sets up the knowledge base,
@@ -552,7 +553,7 @@ class SalesGPT(Chain):
         Parameters
         ----------
         llm : ChatLiteLLM
-            The ChatLiteLLM instance to initialize the SalesGPT Controller from.
+            The ChatLiteLLM instance to initialize the SallySalesBuddy Controller from.
         verbose : bool, optional
             If True, verbose output is enabled. Default is False.
         \*\*kwargs : dict
@@ -560,8 +561,8 @@ class SalesGPT(Chain):
 
         Returns
         -------
-        SalesGPT
-            The initialized SalesGPT Controller.
+        SallySalesBuddy
+            The initialized SallySalesBuddy Controller.
         """
         stage_analyzer_chain = StageAnalyzerChain.from_llm(llm, verbose=verbose)
         sales_conversation_utterance_chain = SalesConversationChain.from_llm(

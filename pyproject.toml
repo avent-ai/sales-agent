@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "SalesGPT"
-version = "0.1.2"  
-description = "SalesGPT - Your Context-Aware AI Sales Assistant"
+name = "SallySalesBuddy"
+version = "0.1.2"
+description = "SallySalesBuddy - Your Context-Aware AI Sales Assistant"
 authors = ["Filip Michalsky "]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/filip-michalsky/SalesGPT"
-repository = "https://github.com/filip-michalsky/SalesGPT"
+homepage = "https://github.com/filip-michalsky/SallySalesBuddy"
+repository = "https://github.com/filip-michalsky/SallySalesBuddy"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",

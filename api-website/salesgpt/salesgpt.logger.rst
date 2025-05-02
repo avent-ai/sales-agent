@@ -1,7 +1,7 @@
-salesgpt.logger module
+SallySalesBuddy.logger module
 ======================
 
-.. automodule:: salesgpt.logger
+.. automodule:: SallySalesBuddy.logger
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,5 +1,5 @@
 import os
-from salesgpt.tools  import send_email_with_gmail  # Adjust the import path as necessary
+from SallySalesBuddy.tools  import send_email_with_gmail  # Adjust the import path as necessary
 from dotenv import load_dotenv
 import smtplib
 from email.mime.multipart import MIMEMultipart

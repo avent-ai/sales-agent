@@ -1,7 +1,7 @@
-salesgpt.parsers module
+SallySalesBuddy.parsers module
 =======================
 
-.. automodule:: salesgpt.parsers
+.. automodule:: SallySalesBuddy.parsers
    :members:
    :undoc-members:
    :show-inheritance:

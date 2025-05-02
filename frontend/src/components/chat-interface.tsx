@@ -12,9 +12,9 @@ import { PostHog } from 'posthog-node'
 let client: PostHog | undefined;
 if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
   client = new PostHog(
-    `${process.env.NEXT_PUBLIC_POSTHOG_ID}`,    
+    `${process.env.NEXT_PUBLIC_POSTHOG_ID}`,
     { host: 'https://app.posthog.com',
-      disableGeoip: false, 
+      disableGeoip: false,
       requestTimeout: 30000
     }
   );
@@ -59,7 +59,7 @@ export function ChatInterface() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  
+
   useEffect(() => {
     thinkingProcessEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [thinkingProcess]);
@@ -71,25 +71,25 @@ export function ChatInterface() {
       setBotHasResponded(false); // Reset the flag
     }
   }, [botHasResponded]);
-  
+
   useEffect(() => {
     // This function will be called on resize events
     const handleResize = () => {
       setMaxHeight(`${window.innerHeight - 200}px`);
     };
-  
+
     // Set the initial value when the component mounts
     handleResize();
-  
+
     // Add the event listener for future resize events
     window.addEventListener('resize', handleResize);
-  
+
     // Return a cleanup function to remove the event listener when the component unmounts
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   useEffect(() => {
-    
+
     // Function to fetch the bot name
     const fetchBotName = async () => {
       if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production" && client) {
@@ -111,7 +111,7 @@ export function ChatInterface() {
           response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/botname`, {
             headers: headers,
           });
-          
+
         } else {
           response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/botname`);
         }
@@ -150,7 +150,7 @@ export function ChatInterface() {
     console.log('NEXT_PUBLIC_ENVIRONMENT:', process.env.NEXT_PUBLIC_ENVIRONMENT);
     console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
   }, []);
-  
+
 
   const handleBotResponse = async (userMessage: string) => {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production" && client) {
@@ -185,11 +185,11 @@ export function ChatInterface() {
         headers: headers,
         body: JSON.stringify(requestData),
       });
-  
+
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
-  
+
       if (stream) {
         {/*Not implemented*/}
       } else {
@@ -216,12 +216,12 @@ export function ChatInterface() {
       setIsBotTyping(false); // Stop showing the typing indicator
       setBotHasResponded(true);
     }
-  };  
+  };
   return (
     <div key="1" className="flex flex-col " style={{ height: '89vh' }}>
       <header className="flex items-center justify-center h-16 bg-gray-900 text-white">
         <BotIcon className="animate-wave h-7 w-6 mr-2" />
-        <h1 className="text-2xl font-bold">SalesGPT</h1>
+        <h1 className="text-2xl font-bold">SallySalesBuddy</h1>
       </header>
       <main className="flex flex-row justify-center items-start bg-gray-100 dark:bg-gray-900 p-4" >
         <div className="flex flex-col w-1/2 h-full bg-white rounded-lg shadow-md p-4 mr-4 chat-messages" style={{maxHeight}}>
@@ -240,7 +240,7 @@ export function ChatInterface() {
         </span>
       </>
     ) : (
-      
+
       <div className="flex w-full justify-between">
         <div className="flex items-center">
           <img
@@ -298,7 +298,7 @@ export function ChatInterface() {
         <div className="flex flex-col w-1/2 h-full bg-white rounded-lg shadow-md p-4 thinking-process" style={{maxHeight}}>
   <div className="flex items-center mb-4">
     <BotIcon className="h-6 w-6 text-gray-500 mr-2" />
-    <h2 className="text-lg font-semibold">AI Sales Agent {botName} Thought Process</h2>
+    <h2 className="text-lg font-semibold">AI {botName} Thought Process</h2>
   </div>
   <div className={`flex-1 overflow-y-auto hide-scroll ${styles.hideScrollbar}`} style={{ overflowX: 'hidden' }}>
             <div>

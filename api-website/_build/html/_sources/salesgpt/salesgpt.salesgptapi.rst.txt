@@ -1,7 +1,7 @@
-salesgpt.salesgptapi module
+SallySalesBuddy.SallySalesBuddyapi module
 ===========================
 
-.. automodule:: salesgpt.salesgptapi
+.. automodule:: SallySalesBuddy.SallySalesBuddyapi
    :members:
    :undoc-members:
    :show-inheritance:

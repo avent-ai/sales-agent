@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from salesgpt.salesgptapi import SalesGPTAPI
+from SallySalesBuddy.SallySalesBuddyapi import SallySalesBuddyAPI
 
 # Load environment variables
 load_dotenv()
@@ -64,7 +64,7 @@ async def get_bot_name(authorization: Optional[str] = Header(None)):
     if os.getenv("ENVIRONMENT") == "production":
         get_auth_key(authorization)
 
-    sales_api = SalesGPTAPI(
+    sales_api = SallySalesBuddyAPI(
         config_path=os.getenv("CONFIG_PATH", "examples/example_agent_setup.json"),
         product_catalog=os.getenv(
             "PRODUCT_CATALOG", "examples/sample_product_catalog.txt"
@@ -104,7 +104,7 @@ async def chat_with_sales_agent(req: MessageList, stream: bool = Query(False), a
         print(f"Session id: {req.session_id}")
     else:
         print("Creating new session")
-        sales_api = SalesGPTAPI(
+        sales_api = SallySalesBuddyAPI(
             config_path=os.getenv("CONFIG_PATH", "examples/example_agent_setup.json"),
             verbose=True,
             product_catalog=os.getenv(

@@ -1,7 +1,7 @@
-salesgpt.agents module
+SallySalesBuddy.agents module
 ======================
 
-.. automodule:: salesgpt.agents
+.. automodule:: SallySalesBuddy.agents
    :members:
    :undoc-members:
    :show-inheritance:

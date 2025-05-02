@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Using Open Source Models
 
-SalesGPT allows you to use open-source models instead of paid models like OpenAI's GPT. To do this, follow these steps:
+SallySalesBuddy allows you to use open-source models instead of paid models like OpenAI's GPT. To do this, follow these steps:
 
 1. **Change the GPT_MODEL Environment Variable:**
    Update the `GPT_MODEL` environment variable in your `.env` file to the desired open-source model. For example:
@@ -27,7 +27,6 @@ SalesGPT allows you to use open-source models instead of paid models like OpenAI
    )
    ```
 
-By following these steps, you can configure SalesGPT to use an open-source model for generating responses.
+By following these steps, you can configure SallySalesBuddy to use an open-source model for generating responses.
 
 For more information on possible model deployments, you can visit: [LiteLLM Providers Documentation](https://litellm.vercel.app/docs/providers)
-

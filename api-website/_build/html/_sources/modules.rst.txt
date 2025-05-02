@@ -1,7 +1,7 @@
-salesgpt
+SallySalesBuddy
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   salesgpt
+   SallySalesBuddy

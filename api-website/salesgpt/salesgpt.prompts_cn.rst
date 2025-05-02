@@ -1,7 +1,7 @@
-salesgpt.prompts\_cn module
+SallySalesBuddy.prompts\_cn module
 ===========================
 
-.. automodule:: salesgpt.prompts_cn
+.. automodule:: SallySalesBuddy.prompts_cn
    :members:
    :undoc-members:
    :show-inheritance:

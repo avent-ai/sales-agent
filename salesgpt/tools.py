@@ -152,8 +152,8 @@ def generate_stripe_payment_link(query: str) -> str:
 
 def get_mail_body_subject_from_query(query):
     prompt = f"""
-    Given the query: "{query}", analyze the content and extract the necessary information to send an email. The information needed includes the recipient's email address, the subject of the email, and the body content of the email. 
-    Based on the analysis, return a dictionary in Python format where the keys are 'recipient', 'subject', and 'body', and the values are the corresponding pieces of information extracted from the query. 
+    Given the query: "{query}", analyze the content and extract the necessary information to send an email. The information needed includes the recipient's email address, the subject of the email, and the body content of the email.
+    Based on the analysis, return a dictionary in Python format where the keys are 'recipient', 'subject', and 'body', and the values are the corresponding pieces of information extracted from the query.
     For example, if the query was about sending an email to notify someone of an upcoming event, the output should look like this:
     {{
         "recipient": "example@example.com",
@@ -236,8 +236,8 @@ def generate_calendly_invitation_link(query):
     "owner": f"https://api.calendly.com/event_types/{event_type_uuid}",
     "owner_type": "EventType"
     }
-    
-    
+
+
     response = requests.post(url, json=payload, headers=headers)
     if response.status_code == 201:
         data = response.json()
@@ -255,23 +255,23 @@ def get_tools(product_catalog):
         Tool(
             name="ProductSearch",
             func=knowledge_base.run,
-            description="useful for when you need to answer questions about product information or services offered, availability and their costs.",
+            description="Useful for answering questions about aligner products, treatment options, pricing, and availability."
         ),
         Tool(
             name="GeneratePaymentLink",
             func=generate_stripe_payment_link,
-            description="useful to close a transaction with a customer. You need to include product name and quantity and customer name in the query input.",
+            description="Useful to close a transaction with a customer. You need to include product name, quantity, and customer name in the query input."
         ),
         Tool(
             name="SendEmail",
             func=send_email_tool,
-            description="Sends an email based on the query input. The query should specify the recipient, subject, and body of the email.",
+            description="Sends an email based on the query input. The query should specify the recipient, subject, and body of the email."
         ),
         Tool(
             name="SendCalendlyInvitation",
             func=generate_calendly_invitation_link,
-            description='''Useful for when you need to create invite for a personal meeting in Sleep Heaven shop. 
-            Sends a calendly invitation based on the query input.''',
+            description='''Useful for scheduling a consultation for SmileCraft aligner treatment.
+            Sends a Calendly invitation link based on the query input.'''
         )
     ]
 

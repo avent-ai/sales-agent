@@ -7,7 +7,7 @@ import warnings
 from dotenv import load_dotenv
 from langchain_community.chat_models import ChatLiteLLM
 
-from salesgpt.agents import SalesGPT
+from SallySalesBuddy.agents import SallySalesBuddy
 
 load_dotenv()  # loads .env file
 
@@ -65,11 +65,11 @@ if __name__ == "__main__":
             sales_agent_kwargs.update(
                 {
                     "product_catalog": "examples/sample_product_catalog.txt",
-                    "salesperson_name": "Ted Lasso",
+                    "salesperson_name": "Sally Sales Buddy",
                 }
             )
 
-        sales_agent = SalesGPT.from_llm(llm, **sales_agent_kwargs)
+        sales_agent = SallySalesBuddy.from_llm(llm, **sales_agent_kwargs)
     else:
         try:
             with open(config_path, "r", encoding="UTF-8") as f:
@@ -82,7 +82,7 @@ if __name__ == "__main__":
             exit(1)
 
         print(f"Agent config {config}")
-        sales_agent = SalesGPT.from_llm(llm, verbose=verbose, **config)
+        sales_agent = SallySalesBuddy.from_llm(llm, verbose=verbose, **config)
 
     sales_agent.seed_agent()
     print("=" * 10)

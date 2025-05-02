@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 
 # Product catalog
-To ensure that SalesGPT can effectively understand and utilize your product catalog, it is important to set up the correct chunk size in the text splitter within the `tools.py` file. Proper chunking helps in maintaining the context and coherence of the product information.
+To ensure that SallySalesBuddy can effectively understand and utilize your product catalog, it is important to set up the correct chunk size in the text splitter within the `tools.py` file. Proper chunking helps in maintaining the context and coherence of the product information.
 
 Here are two examples of incorrect setups and one example of a correct setup:
 
@@ -17,7 +17,7 @@ Here are two examples of incorrect setups and one example of a correct setup:
 ### Correct Setup
 ![Correct Setup](/img/correct.png)
 
-You can implement your product catalog into SalesGPT by loading it. 
+You can implement your product catalog into SallySalesBuddy by loading it.
 To add a different product catalog, such as the `sample_product_catalog_2.txt` file, follow these steps:
 
 1. **Update the product catalog file**: Replace the existing product catalog file with your new product catalog file. For example, you can use the `sample_product_catalog_2.txt` file.

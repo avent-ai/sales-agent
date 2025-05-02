@@ -1,22 +1,22 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from salesgpt.tools import generate_stripe_payment_link, send_email_tool, generate_calendly_invitation_link
+from SallySalesBuddy.tools import generate_stripe_payment_link, send_email_tool, generate_calendly_invitation_link
 import os
 import json
 
 @pytest.fixture
 def mock_requests_post():
-    with patch("salesgpt.tools.requests.request") as mock_post:
+    with patch("SallySalesBuddy.tools.requests.request") as mock_post:
         yield mock_post
 
 @pytest.fixture
 def mock_smtplib():
-    with patch("salesgpt.tools.smtplib.SMTP_SSL") as mock_smtp:
+    with patch("SallySalesBuddy.tools.smtplib.SMTP_SSL") as mock_smtp:
         yield mock_smtp
 
 @pytest.fixture
 def mock_requests():
-    with patch("salesgpt.tools.requests.post") as mock_post:
+    with patch("SallySalesBuddy.tools.requests.post") as mock_post:
         yield mock_post
 
 def test_generate_stripe_payment_link(mock_requests_post):
@@ -27,7 +27,7 @@ def test_generate_stripe_payment_link(mock_requests_post):
     mock_requests_post.return_value = mock_response
 
     # Mock the get_product_id_from_query function to return a valid JSON string
-    with patch("salesgpt.tools.get_product_id_from_query", return_value=json.dumps({"price_id": "price_123"})):
+    with patch("SallySalesBuddy.tools.get_product_id_from_query", return_value=json.dumps({"price_id": "price_123"})):
         # Call the function you're testing
         result = generate_stripe_payment_link("query about a product")
 
@@ -48,7 +48,7 @@ def test_send_email_tool(mock_smtplib):
         "subject": "Test Subject",
         "body": "Test Body"
     }
-    with patch("salesgpt.tools.get_mail_body_subject_from_query", return_value=json.dumps(email_details)):
+    with patch("SallySalesBuddy.tools.get_mail_body_subject_from_query", return_value=json.dumps(email_details)):
         result = send_email_tool("query about sending an email")
         assert result == "Email sent successfully.", "The function should return a success message."
 

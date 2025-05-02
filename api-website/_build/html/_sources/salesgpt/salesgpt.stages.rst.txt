@@ -1,7 +1,7 @@
-salesgpt.stages module
+SallySalesBuddy.stages module
 ======================
 
-.. automodule:: salesgpt.stages
+.. automodule:: SallySalesBuddy.stages
    :members:
    :undoc-members:
    :show-inheritance:

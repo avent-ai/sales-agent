@@ -3,26 +3,19 @@ import os
 from dotenv import load_dotenv
 from langchain_community.chat_models import ChatLiteLLM
 
-from salesgpt.agents import SalesGPT
+from SallySalesBuddy.agents import SallySalesBuddy
 
 load_dotenv()
 
 llm = ChatLiteLLM(temperature=0.9, model_name="gpt-4o")
 
-sales_agent = SalesGPT.from_llm(
+sales_agent = SallySalesBuddy.from_llm(
     llm,
     verbose=False,
-    salesperson_name="Ted Lasso",
+    salesperson_name="Sally Sales Buddy",
     salesperson_role="Sales Representative",
-    company_name="Sleep Haven",
-    company_business="""Sleep Haven
-                            is a premium mattress company that provides
-                            customers with the most comfortable and
-                            supportive sleeping experience possible.
-                            We offer a range of high-quality mattresses,
-                            pillows, and bedding accessories
-                            that are designed to meet the unique
-                            needs of our customers.""",
+    company_name="SmileCraft Aligners",
+    company_business="""SmileCraft Aligners is a provider of custom-made, nearly invisible clear aligners that help people straighten their teeth discreetly and comfortably. Using advanced 3D imaging, our aligners are tailored to each individual's dental profile and offer a modern, convenient alternative to traditional metal braces."""
 )
 
 sales_agent.seed_agent()

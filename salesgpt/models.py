@@ -10,7 +10,7 @@ from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResu
 from langchain_core.runnables import run_in_executor
 from langchain_openai import ChatOpenAI
 
-from salesgpt.tools import completion_bedrock
+from SallySalesBuddy.tools import completion_bedrock
 
 
 class BedrockCustomModel(ChatOpenAI):
@@ -71,7 +71,7 @@ class BedrockCustomModel(ChatOpenAI):
         message = AIMessage(content=content)
         generation = ChatGeneration(message=message)
         return ChatResult(generations=[generation])
-    
+
     async def _agenerate(
         self,
         messages: List[BaseMessage],
@@ -83,7 +83,7 @@ class BedrockCustomModel(ChatOpenAI):
         should_stream = stream if stream is not None else self.streaming
         if should_stream:
             raise NotImplementedError("Streaming not implemented")
-        
+
         last_message = messages[-1]
 
         print(messages)
@@ -139,4 +139,3 @@ async def acompletion_bedrock(model_id, system_prompt, messages, max_tokens=1000
         # print('RESPONSE BODY', response_body)
 
         return response_body
-

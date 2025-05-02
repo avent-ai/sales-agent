@@ -2,8 +2,8 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain_community.chat_models import ChatLiteLLM
 
-from salesgpt.logger import time_logger
-from salesgpt.prompts import (
+from SallySalesBuddy.logger import time_logger
+from SallySalesBuddy.prompts import (
     SALES_AGENT_INCEPTION_PROMPT,
     STAGE_ANALYZER_INCEPTION_PROMPT,
 )

@@ -1,7 +1,7 @@
-salesgpt.prompts module
+SallySalesBuddy.prompts module
 =======================
 
-.. automodule:: salesgpt.prompts
+.. automodule:: SallySalesBuddy.prompts
    :members:
    :undoc-members:
    :show-inheritance:

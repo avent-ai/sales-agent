@@ -15,8 +15,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'SalesGPT Docs',
-  tagline: 'Get up to speed with SalesGPT',
+  title: 'SallySalesBuddy Docs',
+  tagline: 'Get up to speed with SallySalesBuddy',
   favicon: '/img/sgpt_fav.ico',
 
   // Set the production url of your site here
@@ -28,7 +28,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'filip-michalsky', // Usually your GitHub org/user name.
-  projectName: 'SalesGPT', // Usually your repo name.
+  projectName: 'SallySalesBuddy', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -47,14 +47,14 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: '/', 
+          routeBasePath: '/',
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/filip-michalsky/salesgpt/tree/main/', //the main is the branch name specified 
+            'https://github.com/filip-michalsky/SallySalesBuddy/tree/main/', //the main is the branch name specified
         },
-        blog: false, 
+        blog: false,
         //blog: {
         //  showReadingTime: true,
           // Please change this to your repo.
@@ -82,22 +82,22 @@ const config = {
       // Replace with your project's social card
       image: 'img/robot_mascot.ico',
       navbar: {
-        title: 'SalesGPT',
+        title: 'SallySalesBuddy',
         logo: {
           alt: 'My Site Logo',
           src: 'img/robot_mascot.ico',
         },
-        
+
         items: [
         {
           to: '/Use_Cases/Mattress_salesman',
           position: 'left',
           label: 'Use Cases',
         },
-        
-          {href: 'https://salesgpt-api.vercel.app', label: 'API', position: 'left'},
+
+          {href: 'https://SallySalesBuddy-api.vercel.app', label: 'API', position: 'left'},
           {
-            href: 'https://github.com/filip-michalsky/salesgpt',
+            href: 'https://github.com/filip-michalsky/SallySalesBuddy',
             label: 'GitHub',
             position: 'right',
           },
@@ -132,7 +132,7 @@ const config = {
                 href: 'https://twitter.com/docusaurus',
               },
             ],
-          }, 
+          },
           {
             title: 'More',
             items: [
@@ -147,7 +147,7 @@ const config = {
             ],
           },*/
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} SalesGPT, Filip Michalsky & Honza Michna`,
+        copyright: `Copyright © ${new Date().getFullYear()} SallySalesBuddy, Filip Michalsky & Honza Michna`,
       },
       prism: {
         theme: prismThemes.github,
@@ -157,4 +157,3 @@ const config = {
 };
 
 export default config;
-

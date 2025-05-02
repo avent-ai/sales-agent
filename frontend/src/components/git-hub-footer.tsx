@@ -10,7 +10,7 @@ export function GitHubFooter() {
     <footer className="w-full h-20 flex items-center justify-center bg-white border-t border-animated">
       <a
         className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-2 border-transparent rounded-md hover:border-animated transition-all"
-        href="https://github.com/filip-michalsky/SalesGPT"
+        href="https://github.com/filip-michalsky/SallySalesBuddy"
         target="_blank"
         rel="noopener noreferrer"
       >

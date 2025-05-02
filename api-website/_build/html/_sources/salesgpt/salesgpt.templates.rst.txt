@@ -1,7 +1,7 @@
-salesgpt.templates module
+SallySalesBuddy.templates module
 =========================
 
-.. automodule:: salesgpt.templates
+.. automodule:: SallySalesBuddy.templates
    :members:
    :undoc-members:
    :show-inheritance:
