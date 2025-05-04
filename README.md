@@ -35,8 +35,6 @@ pyenv activate sales-agent
 
 ```bash
 pip install -r requirements.txt
-
-#removing make setup
 ```
 
 ---
@@ -62,6 +60,7 @@ In a  **separate terminal** :
 > Make sure [Node.js &amp; npm](https://nodejs.org/) are installed.
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
