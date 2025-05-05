@@ -24,7 +24,9 @@ Edit `.env` and replace the OpenAI key with your own.
 pyenv install 3.10
 pyenv virtualenv 3.10 sales-agent
 pyenv local sales-agent
-m
+
+pyenv activate sales-agent
+
 ```
 
 ---
@@ -59,6 +61,7 @@ In a  **separate terminal** :
 > Make sure [Node.js &amp; npm](https://nodejs.org/) are installed.
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
