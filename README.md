@@ -1,6 +1,4 @@
-
 # 🧠 Sales Agent Setup Guide
-
 
 Follow these steps to run the Sales Agent locally.
 
@@ -26,7 +24,9 @@ Edit `.env` and replace the OpenAI key with your own.
 pyenv install 3.10
 pyenv virtualenv 3.10 sales-agent
 pyenv local sales-agent
+
 pyenv activate sales-agent
+
 ```
 
 ---
@@ -35,6 +35,7 @@ pyenv activate sales-agent
 
 ```bash
 pip install -r requirements.txt
+make setup
 ```
 
 ---

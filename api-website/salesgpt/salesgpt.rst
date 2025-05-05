@@ -14,7 +14,7 @@ Submodules
    SallySalesBuddy.parsers
    SallySalesBuddy.prompts
    SallySalesBuddy.prompts_cn
-   SallySalesBuddy.SallySalesBuddyapi
+   SallySalesBuddy.sallysalesbuddyapi
    SallySalesBuddy.stages
    SallySalesBuddy.templates
    SallySalesBuddy.tools

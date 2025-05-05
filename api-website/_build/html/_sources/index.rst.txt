@@ -16,7 +16,7 @@ Welcome to SallySalesBuddy's documentation!
    Parsers <SallySalesBuddy/SallySalesBuddy.parsers>
    Prompts <SallySalesBuddy/SallySalesBuddy.prompts>
    Prompts_cn <SallySalesBuddy/SallySalesBuddy.prompts_cn>
-   SallySalesBuddy API <SallySalesBuddy/SallySalesBuddy.SallySalesBuddyapi>
+   SallySalesBuddy API <SallySalesBuddy/SallySalesBuddy.sallysalesbuddyapi>
    Stages <SallySalesBuddy/SallySalesBuddy.stages>
    Templates <SallySalesBuddy/SallySalesBuddy.templates>
    Tools <SallySalesBuddy/SallySalesBuddy.tools>
