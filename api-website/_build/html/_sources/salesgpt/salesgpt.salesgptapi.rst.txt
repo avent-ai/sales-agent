@@ -1,7 +1,7 @@
-SallySalesBuddy.SallySalesBuddyapi module
+SallySalesBuddy.sallysalesbuddyapi module
 ===========================
 
-.. automodule:: SallySalesBuddy.SallySalesBuddyapi
+.. automodule:: SallySalesBuddy.sallysalesbuddyapi
    :members:
    :undoc-members:
    :show-inheritance:

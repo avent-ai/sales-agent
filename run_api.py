@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from SallySalesBuddy.SallySalesBuddyapi import SallySalesBuddyAPI
+from SallySalesBuddy.sallysalesbuddyapi import SallySalesBuddyAPI
 
 # Load environment variables
 load_dotenv()

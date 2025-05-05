@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch, AsyncMock
 import pytest
 from dotenv import load_dotenv
 
-from SallySalesBuddy.SallySalesBuddyapi import SallySalesBuddyAPI
+from SallySalesBuddy.sallysalesbuddyapi import SallySalesBuddyAPI
 
 dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
 load_dotenv(dotenv_path)
@@ -14,19 +14,19 @@ from unittest.mock import patch
 
 @pytest.fixture
 def mock_SallySalesBuddy_step():
-    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.step") as mock_step:
+    with patch("SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddy.step") as mock_step:
         mock_step.return_value = "Mock response"
         yield
 '''
 @pytest.fixture
 def mock_SallySalesBuddy_astep():
-    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.astep") as mock_step:
+    with patch("SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddy.astep") as mock_step:
         mock_step.return_value = "Mock response"
         yield
 '''
 @pytest.fixture
 def mock_SallySalesBuddy_astep():
-    with patch("SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddy.astep", new_callable=AsyncMock) as mock_step:
+    with patch("SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddy.astep", new_callable=AsyncMock) as mock_step:
         mock_step.return_value = AsyncMock(return_value={
             "response": "Mock response",
             "intermediate_steps": []  # Ensure this key is present

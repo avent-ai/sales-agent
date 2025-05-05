@@ -23,7 +23,7 @@
         </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SallySalesBuddy.SallySalesBuddyapi module &mdash; SallySalesBuddy  documentation</title>
+  <title>SallySalesBuddy.sallysalesbuddyapi module &mdash; SallySalesBuddy  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a36129ee" />
@@ -87,10 +87,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li class="toctree-l1"><a class="reference internal" href="SallySalesBuddy.prompts.html">Prompts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SallySalesBuddy.prompts_cn.html">Prompts_cn</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SallySalesBuddy API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.do()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do_stream"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.do_stream()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.initialize_agent"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.initialize_agent()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.do()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do_stream"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.do_stream()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.initialize_agent"><code class="docutils literal notranslate"><span class="pre">SallySalesBuddyAPI.initialize_agent()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -115,9 +115,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">SallySalesBuddy.SallySalesBuddyapi module</li>
+      <li class="breadcrumb-item active">SallySalesBuddy.sallysalesbuddyapi module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/SallySalesBuddy/SallySalesBuddy.SallySalesBuddyapi.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/SallySalesBuddy/SallySalesBuddy.sallysalesbuddyapi.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -125,25 +125,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
 
-  <section id="module-SallySalesBuddy.SallySalesBuddyapi">
-<span id="SallySalesBuddy-SallySalesBuddyapi-module"></span><h1>SallySalesBuddy.SallySalesBuddyapi module<a class="headerlink" href="#module-SallySalesBuddy.SallySalesBuddyapi" title="Link to this heading"></a></h1>
+  <section id="module-SallySalesBuddy.sallysalesbuddyapi">
+<span id="SallySalesBuddy-SallySalesBuddyapi-module"></span><h1>SallySalesBuddy.sallysalesbuddyapi module<a class="headerlink" href="#module-SallySalesBuddy.sallysalesbuddyapi" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SallySalesBuddy.SallySalesBuddyapi.</span></span><span class="sig-name descname"><span class="pre">SallySalesBuddyAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_turns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gpt-3.5-turbo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'examples/sample_product_catalog.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SallySalesBuddy.sallysalesbuddyapi.</span></span><span class="sig-name descname"><span class="pre">SallySalesBuddyAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_turns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gpt-3.5-turbo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">product_catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'examples/sample_product_catalog.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">human_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">human_input</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do_stream">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">do_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">conversation_history:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;],</span> <span class="pre">human_input=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.do_stream" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do_stream">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">do_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">conversation_history:</span> <span class="pre">[&lt;class</span> <span class="pre">'str'&gt;],</span> <span class="pre">human_input=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.do_stream" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.initialize_agent">
-<span class="sig-name descname"><span class="pre">initialize_agent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.SallySalesBuddyapi.SallySalesBuddyAPI.initialize_agent" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.initialize_agent">
+<span class="sig-name descname"><span class="pre">initialize_agent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SallySalesBuddy.sallysalesbuddyapi.SallySalesBuddyAPI.initialize_agent" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
