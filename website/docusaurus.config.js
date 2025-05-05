@@ -27,7 +27,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'filip-michalsky', // Usually your GitHub org/user name.
+  organizationName: 'AVENT-AI', // Usually your GitHub org/user name.
   projectName: 'SallySalesBuddy', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -52,7 +52,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/filip-michalsky/SallySalesBuddy/tree/main/', //the main is the branch name specified
+            'https://github.com/AVENT-AI/SallySalesBuddy/tree/main/', //the main is the branch name specified
         },
         blog: false,
         //blog: {
@@ -97,7 +97,7 @@ const config = {
 
           {href: 'https://SallySalesBuddy-api.vercel.app', label: 'API', position: 'left'},
           {
-            href: 'https://github.com/filip-michalsky/SallySalesBuddy',
+            href: 'https://github.com/AVENT-AI/SallySalesBuddy',
             label: 'GitHub',
             position: 'right',
           },
@@ -147,7 +147,7 @@ const config = {
             ],
           },*/
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} SallySalesBuddy, Filip Michalsky & Honza Michna`,
+        copyright: `Copyright © ${new Date().getFullYear()} SallySalesBuddy, AVENT AI`,
       },
       prism: {
         theme: prismThemes.github,

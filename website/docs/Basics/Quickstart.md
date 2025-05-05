@@ -9,7 +9,7 @@ sidebar_position: 2
 ## Run an Example AI Sales agent
 If you used a local installation of SallySalesBuddy skip the next two steps and directly run the run.py script:
 
-`git clone https://github.com/filip-michalsky/SallySalesBuddy.git`
+`git clone https://github.com/AVENT-AI/SallySalesBuddy.git`
 
 `cd SallySalesBuddy`
 
@@ -34,4 +34,4 @@ To delete the virtual environment you used for SallySalesBuddy programming and y
 
 We have a SallySalesBuddy deployment demo via FastAPI.
 
-Please refer to [README-api.md](https://github.com/filip-michalsky/SallySalesBuddy/blob/main/README-api.md) for instructions!
+Please refer to [README-api.md](https://github.com/AVENT-AI/SallySalesBuddy/blob/main/README-api.md) for instructions!

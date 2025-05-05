@@ -4,19 +4,15 @@
 
 <img src="https://demo-bucket-45.s3.amazonaws.com/filtr145_simple_robot_mascot_for_a_sales_company_professional_5282c6e6-40c1-4576-95c8-e4ba3c389f3f.png"  width="200">
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/filipmichalsky?style=social)](https://twitter.com/filipmichalsky)
-![GitHub Repo stars](https://img.shields.io/github/stars/filip-michalsky/SallySalesBuddy?style=social)
-[![Downloads](https://pepy.tech/badge/SallySalesBuddy)](https://pepy.tech/project/SallySalesBuddy)
+![GitHub Repo stars](https://img.shields.io/github/stars/avent-ai/sales-agent?style=social)
+
 [![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/SallySalesBuddy.svg)](https://badge.fury.io/py/SallySalesBuddy)
-![GithubActions](https://github.com/filip-michalsky/SallySalesBuddy/actions/workflows/poetry_unit_tests.yml/badge.svg)
+![GithubActions](https://github.com/avent-ai/sales-agent/actions/workflows/poetry_unit_tests.yml/badge.svg)
 `<br>`
-[![Discord](https://img.shields.io/badge/Join%20us%20on-Discord-7289DA?style=flat&logo=discord)](https://discord.gg/KXFucQyHf4)
 
 </div>
 <div align="center">
-
-
 
 
 [Our Vision](#our-vision-build-the-best-open-source-ai-sales-agent) | [Features](#features) | [Demos and Use Cases](#demos-and-use-cases) |  [Quickstart](#quick-start) | [Setup](#setup) | [Contact Us](https://5b7mfhwiany.typeform.com/to/n6CbtxJm?utm_source=github-SallySalesBuddy&utm_medium=readme&utm_campaign=leads)
@@ -56,7 +52,7 @@ If you need assistance, our team is here to help! Please reach out to us at [Ody
 
 [![Ted - Mattress Sales Representative Closing Deals](https://cdn.loom.com/sessions/thumbnails/440086e17aff42d79881a6eca147ae5e-with-play.gif)](https://www.loom.com/share/440086e17aff42d79881a6eca147ae5e)
 
-> **Try it yourself on our [SallySalesBuddy hosted frontend demo](https://sales-gpt-frontend-git-main-filip-odysseypartns-projects.vercel.app/chat).**
+> **Try it yourself on our [SallySalesBuddy hosted frontend demo](https://replace-this-demo.com).**
 
 # Contact Us for Suggestions, Questions, or Help
 
@@ -236,7 +232,7 @@ To deactivate a virtual environment after you have stopped using it simply run: 
 
 Clone the SallySalesBuddy Github repository:
 
-`git clone https://github.com/filip-michalsky/SallySalesBuddy.git`
+`git clone https://github.com/avent-ai/sales-agent.git`
 
 Navigate to the repository and in case you used a different venv name rename the VENV variable in the Makefile:
 
@@ -406,15 +402,15 @@ For futher reading take a look at the [docs](https://docs.smith.langchain.com/)
 4) Write more documentation
 5) Better code documentation
 6) Refactor
-7) ~~Improve reliability of the parser [issue here](https://github.com/filip-michalsky/SallySalesBuddy/issues/26) and [here](https://github.com/filip-michalsky/SallySalesBuddy/issues/25)~~
+7) ~~Improve reliability of the parser [issue here](https://github.com/AVENT-AI/SallySalesBuddy/issues/26) and [here](https://github.com/AVENT-AI/SallySalesBuddy/issues/25)~~
 8) Improve Deployment Instructions
 9) Calling Functionality - sample code
 10) Enterprise-Grade Security - integration with [PromptArmor](https://promptarmor.com/) to protect your AI Sales Agents against security vulnerabilities
 11) LLM evaluations
 12) Resolve tickets and PRs (ongoing)
-13) Add example implementation of OpenAI functions agent[issue here](https://github.com/filip-michalsky/SallySalesBuddy/issues/17)
-14) Add support for multiple tools [issue here](https://github.com/filip-michalsky/SallySalesBuddy/issues/10)
-15) Add an agent controller for when stages need to be traversed linearly without skips [issue here](https://github.com/filip-michalsky/SallySalesBuddy/issues/19)
+13) Add example implementation of OpenAI functions agent[issue here](https://github.com/AVENT-AI/SallySalesBuddy/issues/17)
+14) Add support for multiple tools [issue here](https://github.com/AVENT-AI/SallySalesBuddy/issues/10)
+15) Add an agent controller for when stages need to be traversed linearly without skips [issue here](https://github.com/AVENT-AI/SallySalesBuddy/issues/19)
 16) Add `tool_getter` to choose a tool based on vector distance to the tasks needed to be done
 17) What tools should the agent have? (e.g., the ability to search the internet)
 18) Add the ability of Sales Agent to interact with AI plugins on your website (.well-known/ai-plugin.json)
@@ -422,16 +418,14 @@ For futher reading take a look at the [docs](https://docs.smith.langchain.com/)
 
 # About the Team
 
-Lead Maintaner: Filip Michalsky
+Lead Maintaner: Livia Ellen
 
-- [Contact Email](mailto:filipmichalsky@gmail.com)
-- [LinkedIn](https://www.linkedin.com/in/filip-michalsky/)
-- Follow us on X at [@FilipMichalsky](https://twitter.com/FilipMichalsky)
+
+- [LinkedIn](https://www.linkedin.com/in/livia-ellen/)
+- Follow us on X at [@FilipMichalsky](https://twitter.com/
 
 Our Support Team:
 
-- AI Engineering: Honza Michna ([LinkedIn](https://www.linkedin.com/in/jan-michna-998b78132/))
-- Software Engineer: Illia Makovoz
 
 # How to Contribute
 

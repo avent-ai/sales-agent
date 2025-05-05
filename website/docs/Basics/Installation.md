@@ -28,7 +28,7 @@ To deactivate a virtual environment after you have stopped using it simply run: 
 
 Clone the SallySalesBuddy Github repository:
 
-`git clone https://github.com/filip-michalsky/SallySalesBuddy.git`
+`git clone https://github.com/AVENT-AI/SallySalesBuddy.git`
 
 Navigate to the repository and in case you used a different venv name rename the VENV variable in the Makefile:
 

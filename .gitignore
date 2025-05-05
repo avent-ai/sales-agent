@@ -11,7 +11,7 @@ examples/sales_agent_bedrock.ipynb
 **__pycache__
 /scratch
 **.chroma/
-.env.filip
+.env
 
 
 # Distribution / packaging

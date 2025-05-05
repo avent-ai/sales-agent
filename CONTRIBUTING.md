@@ -62,7 +62,7 @@ To clone the project repository:
 
 - Ensure git is installed on your system. If not, download and install from git-scm.com.
 - Navigate to the directory where you want to clone the repository.
-- Clone the repository: `git clone https://github.com/filip-michalsky/SallySalesBuddy.git`.
+- Clone the repository: `git clone git@github.com:avent-ai/sales-agent.git`.
 
 ### 5. Installing Dependencies with Poetry
 
