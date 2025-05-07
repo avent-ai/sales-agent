@@ -8,3 +8,7 @@ ipykernel>=6.27.1
 langchain-openai==0.0.2
 boto3>=1.33.2,<1.34.35
 aioboto3==12.3.0
+flask-cors
+email-validator
+pandas
+scikit-learn

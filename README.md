@@ -32,7 +32,6 @@ pyenv activate sales-agent
 
 ```bash
 pip install -r requirements.txt
-pip install flask-cors email-validator
 make setup
 ```
 
@@ -45,7 +44,7 @@ make setup
 In the root project folder:
 
 ```bash
-python start_sentiment_service.py
+python3 start_sentiment_service.py
 ```
 
 This will start the sentiment analysis service on port 5001.
