@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from sentiment_analyzer import SentimentAnalyzer
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 analyzer = SentimentAnalyzer()
 
 @app.route('/analyze', methods=['POST'])

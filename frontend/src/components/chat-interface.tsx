@@ -1,24 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid'; // For generating unique session_id
+import { v4 as uuidv4 } from 'uuid';
 import { Input } from "@/components/ui/input";
 import BotIcon from '@/components/ui/bot-icon';
-import LoaderIcon from '@/components/ui/loader-icon';
 import styles from './ChatInterface.module.css';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-
-import { PostHog } from 'posthog-node'
-
-let client: PostHog | undefined;
-if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
-  client = new PostHog(
-    `${process.env.NEXT_PUBLIC_POSTHOG_ID}`,
-    { host: 'https://app.posthog.com',
-      disableGeoip: false,
-      requestTimeout: 30000
-    }
-  );
-}
 
 type Message = {
   id: string;
@@ -41,9 +27,10 @@ type Message = {
   };
 };
 
-// Sentiment Analysis API function
+// Improved sentiment analysis function
 async function analyzeSentiment(text: string) {
   try {
+    console.log("Analyzing sentiment for:", text);
     const response = await fetch('http://localhost:5001/analyze', {
       method: 'POST',
       headers: {
@@ -56,10 +43,12 @@ async function analyzeSentiment(text: string) {
       throw new Error(`Sentiment API error: ${response.statusText}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+    console.log("Sentiment analysis result:", result);
+    return result;
   } catch (error) {
     console.error('Error analyzing sentiment:', error);
-    // Fallback if API is not available
+    // Return default values if API fails
     return {
       label: "neutral",
       score: 0.6,
@@ -73,20 +62,12 @@ async function analyzeSentiment(text: string) {
 export function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [session_id] = useState(uuidv4()); // Unique session_id generated when the component mounts
+  const [session_id] = useState(uuidv4());
   const [stream, setStream] = useState(false);
   const [botName, setBotName] = useState('');
-  const [botMessageIndex, setBotMessageIndex] = useState(1)
-
-  const [conversationalStage, setConversationalStage] = useState('');
-  const [thinkingProcess, setThinkingProcess] = useState<{
-    conversationalStage: string,
-    tool?: string,
-    toolInput?: string,
-    actionOutput?: string,
-    actionInput?: string
-  }[]>([]);
-  const [maxHeight, setMaxHeight] = useState('80vh'); // Default to 100% of the viewport height
+  const [botMessageIndex, setBotMessageIndex] = useState(1);
+  const [thinkingProcess, setThinkingProcess] = useState<any[]>([]);
+  const [maxHeight, setMaxHeight] = useState('80vh');
   const [isBotTyping, setIsBotTyping] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const thinkingProcessEndRef = useRef<null | HTMLDivElement>(null);
@@ -101,144 +82,83 @@ export function ChatInterface() {
   }, [thinkingProcess]);
 
   useEffect(() => {
-    if (botHasResponded) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      thinkingProcessEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      setBotHasResponded(false); // Reset the flag
-    }
-  }, [botHasResponded]);
-
-  useEffect(() => {
-    // This function will be called on resize events
+    // Set the height based on viewport
     const handleResize = () => {
       setMaxHeight(`${window.innerHeight - 200}px`);
     };
-
-    // Set the initial value when the component mounts
     handleResize();
-
-    // Add the event listener for future resize events
     window.addEventListener('resize', handleResize);
-
-    // Return a cleanup function to remove the event listener when the component unmounts
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
-
-    // Function to fetch the bot name
+    // Fetch bot name when component mounts
     const fetchBotName = async () => {
-      if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production" && client) {
-        client.capture({
-          distinctId: session_id,
-          event: 'fetched-bot-name',
-          properties: {
-            $current_url: window.location.href,
-          },
-        });
-      }
-
       try {
-        let response;
-        const headers: Record<string, string> = {};
-        if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
-          console.log('Authorization Key:', process.env.NEXT_PUBLIC_AUTH_KEY); // Add this line
-          headers['Authorization'] = `Bearer ${process.env.NEXT_PUBLIC_AUTH_KEY}`;
-          response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/botname`, {
-            headers: headers,
-          });
-
-        } else {
-          response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/botname`);
-        }
-
+        console.log("Fetching bot name from API...");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/botname`);
+        
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-
+        
         const data = await response.json();
-        setBotName(data.name); // Save the bot name in the state
-        console.log(botName);
+        console.log("Bot name received:", data);
+        setBotName(data.name);
       } catch (error) {
         console.error("Failed to fetch the bot's name:", error);
       }
     };
-
-    // Call the function to fetch the bot name
+    
     fetchBotName();
-  }, [botName, session_id]); // Include botName and session_id in the dependency array
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  // Updated to include sentiment analysis
   const sendMessage = async () => {
     if (!inputValue.trim()) return;
-
-    // Analyze sentiment
+    
+    console.log("Sending message:", inputValue);
+    
+    // First analyze sentiment
     const sentiment = await analyzeSentiment(inputValue);
-    console.log('Sentiment analysis:', sentiment);
-
-    // Add user message with sentiment information
-    const userMessage = `${inputValue}`;
-    const updatedMessages = [...messages, {
+    
+    // Add user message with sentiment
+    const newUserMessage: Message = {
       id: uuidv4(),
-      text: userMessage,
-      sender: 'user' as 'user',
+      text: inputValue,
+      sender: 'user',
       sentiment: sentiment
-    }];
-
-    setMessages(updatedMessages);
-
-    // Send to backend with sentiment information
-    handleBotResponse(inputValue, sentiment);
+    };
+    
+    setMessages(prev => [...prev, newUserMessage]);
+    
+    // Clear input field
     setInputValue('');
+    
+    // Now send to backend
+    handleBotResponse(inputValue, sentiment);
   };
 
-  useEffect(() => {
-    console.log('NEXT_PUBLIC_AUTH_KEY:', process.env.NEXT_PUBLIC_AUTH_KEY);
-    console.log('NEXT_PUBLIC_ENVIRONMENT:', process.env.NEXT_PUBLIC_ENVIRONMENT);
-    console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
-  }, []);
-
-  // Updated to include sentiment analysis
   const handleBotResponse = async (userMessage: string, sentiment: any) => {
-    if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production" && client) {
-      client.capture({
-        distinctId: session_id,
-        event: 'sent-message',
-        properties: {
-          $current_url: window.location.href,
-          sentiment: sentiment.label,
-          sentiment_score: sentiment.score
-        },
-      });
-    }
-
-    // Include sentiment in the message
-    const enhancedMessage = `[Sentiment: ${sentiment.label}] ${userMessage}`;
-
-    const requestData = {
-      session_id,
-      human_say: enhancedMessage, // Use the enhanced message with sentiment
-      stream,
-    };
-    setIsBotTyping(true); // Start showing the typing indicator
+    console.log("Requesting bot response for:", userMessage);
+    setIsBotTyping(true);
 
     try {
-      const headers: Record<string, string> = {
-        'Content-Type': 'application/json'
+      const requestData = {
+        session_id,
+        human_say: userMessage,
+        stream,
       };
 
-      if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
-        console.log('Authorization Key:', process.env.NEXT_PUBLIC_AUTH_KEY); // Add this line
-        headers['Authorization'] = `Bearer ${process.env.NEXT_PUBLIC_AUTH_KEY}`;
-      }
-
+      console.log("Sending request to API:", `${process.env.NEXT_PUBLIC_API_URL}/chat`);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
         method: 'POST',
-        headers: headers,
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(requestData),
       });
 
@@ -246,35 +166,54 @@ export function ChatInterface() {
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
 
-      if (stream) {
-        {/*Not implemented*/}
-      } else {
-        const data = await response.json();
-        console.log('Bot response:', data);
-        setBotName(data.bot_name); // Update bot name based on response
-        setConversationalStage(data.conversational_stage);
-        // Update the thinkingProcess state with new fields from the response
-        setThinkingProcess(prevProcess => [...prevProcess, {
+      const data = await response.json();
+      console.log("Received bot response:", data);
+
+      // Update bot name if provided
+      if (data.bot_name) {
+        setBotName(data.bot_name);
+      }
+
+      // Add thinking process
+      if (data.conversational_stage) {
+        setThinkingProcess(prev => [...prev, {
           conversationalStage: data.conversational_stage,
           tool: data.tool,
           toolInput: data.tool_input,
           actionOutput: data.action_output,
           actionInput: data.action_input
         }]);
-        const botMessageText = `${data.response}`;
-        const botMessage: Message = { id: uuidv4(), text: botMessageText, sender: 'bot' };
-        setBotMessageIndex(botMessageIndex + 1);
-        setMessages((prevMessages) => [...prevMessages, botMessage]);
       }
+
+      // Add bot message
+      const botMessage: Message = {
+        id: uuidv4(),
+        text: data.response || "I'm not sure how to respond to that.",
+        sender: 'bot'
+      };
+
+      setBotMessageIndex(prev => prev + 1);
+      setMessages(prev => [...prev, botMessage]);
+      
     } catch (error) {
       console.error("Failed to fetch bot's response:", error);
+      
+      // Add error message as bot response
+      const errorMessage: Message = {
+        id: uuidv4(),
+        text: "Sorry, I'm having trouble connecting to the server. Please try again later.",
+        sender: 'bot'
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+      
     } finally {
-      setIsBotTyping(false); // Stop showing the typing indicator
+      setIsBotTyping(false);
       setBotHasResponded(true);
     }
   };
 
-  // Added CSS for sentiment visualization
+  // CSS for sentiment visualization
   const sentimentBarStyle = {
     height: '5px',
     borderRadius: '5px',
@@ -295,77 +234,75 @@ export function ChatInterface() {
             <h2 className="text-lg font-semibold">Chat Interface With The Customer</h2>
           </div>
           <div className={`flex-1 overflow-y-auto ${styles.hideScrollbar}`}>
-        {messages.map((message, index) => (
-  <div key={message.id} className="flex items-center p-2">
-    {message.sender === 'user' ? (
-      <>
-        <span role="img" aria-label="User" className="mr-2">👤</span>
-        <div className="flex flex-col">
-          <span className={`text-frame p-2 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-900`}>
-            {message.text}
-          </span>
+            {messages.map((message, index) => (
+              <div key={message.id} className="flex items-center p-2">
+                {message.sender === 'user' ? (
+                  <>
+                    <span role="img" aria-label="User" className="mr-2">👤</span>
+                    <div className="flex flex-col">
+                      <span className={`text-frame p-2 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-900`}>
+                        {message.text}
+                      </span>
 
-          {/* Display sentiment for user messages */}
-          {message.sentiment && (
-            <div className="mt-1 text-xs text-gray-600">
-              <div>Detected sentiment: {message.sentiment.label} ({Math.round(message.sentiment.score * 100)}% confidence)</div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.positive_prob * 100)}px`, backgroundColor: '#28a745'}}></div>
-                <span className="text-xs">Positive</span>
+                      {/* Display sentiment for user messages */}
+                      {message.sentiment && (
+                        <div className="mt-1 text-xs text-gray-600">
+                          <div>Detected sentiment: {message.sentiment.label} ({Math.round(message.sentiment.score * 100)}% confidence)</div>
+                          <div className="flex items-center mt-1">
+                            <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.positive_prob * 100)}px`, backgroundColor: '#28a745'}}></div>
+                            <span className="text-xs">Positive</span>
+                          </div>
+                          <div className="flex items-center mt-1">
+                            <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.neutral_prob * 100)}px`, backgroundColor: '#6c757d'}}></div>
+                            <span className="text-xs">Neutral</span>
+                          </div>
+                          <div className="flex items-center mt-1">
+                            <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.negative_prob * 100)}px`, backgroundColor: '#dc3545'}}></div>
+                            <span className="text-xs">Negative</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex w-full justify-between">
+                    <div className="flex items-center">
+                      <img
+                        alt="Bot"
+                        className="rounded-full mr-2"
+                        src="/maskot.png"
+                        style={{ width: 24, height: 24, objectFit: "cover" }}
+                      />
+                      <span className={`text-frame p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900`}>
+                      <ReactMarkdown rehypePlugins={[rehypeRaw]} components={{
+                        a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" />
+                      }}>
+                        {message.text}
+                      </ReactMarkdown>
+                      </span>
+                    </div>
+                    {message.sender === 'bot' && (
+                      <div className="flex items-center justify-end ml-2">
+                        <div className="text-sm text-gray-500" style={{minWidth: '20px', textAlign: 'right'}}>
+                          <strong>({messages.filter((m, i) => m.sender === 'bot' && i <= index).length})</strong>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.neutral_prob * 100)}px`, backgroundColor: '#6c757d'}}></div>
-                <span className="text-xs">Neutral</span>
+            ))}
+            {isBotTyping && (
+              <div className="flex items-center justify-start">
+                <img alt="Bot" className="rounded-full mr-2" src="/maskot.png" style={{ width: 24, height: 24, objectFit: "cover" }} />
+                <div className={`${styles.typingBubble}`}>
+                <span className={`${styles.typingDot}`}></span>
+                <span className={`${styles.typingDot}`}></span>
+                <span className={`${styles.typingDot}`}></span>
               </div>
-              <div className="flex items-center mt-1">
-                <div style={{...sentimentBarStyle, width: `${Math.round(message.sentiment.negative_prob * 100)}px`, backgroundColor: '#dc3545'}}></div>
-                <span className="text-xs">Negative</span>
               </div>
-            </div>
-          )}
-        </div>
-      </>
-    ) : (
-
-      <div className="flex w-full justify-between">
-        <div className="flex items-center">
-          <img
-            alt="Bot"
-            className="rounded-full mr-2"
-            src="/maskot.png"
-            style={{ width: 24, height: 24, objectFit: "cover" }}
-          />
-          <span className={`text-frame p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900`}>
-          <ReactMarkdown rehypePlugins={[rehypeRaw]} components={{
-            a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" />
-          }}>
-            {message.text}
-          </ReactMarkdown>
-          </span>
-        </div>
-        {message.sender === 'bot' && (
-          <div className="flex items-center justify-end ml-2">
-            {/* Style the index similar to the thinking process and position it near the border */}
-            <div className="text-sm text-gray-500" style={{minWidth: '20px', textAlign: 'right'}}>
-              <strong>({messages.filter((m, i) => m.sender === 'bot' && i <= index).length})</strong>
-            </div>
-          </div>
-        )}
-      </div>
-    )}
-    <div ref={messagesEndRef} />
-  </div>
-))}
-  {isBotTyping && (
-    <div className="flex items-center justify-start">
-      <img alt="Bot" className="rounded-full mr-2" src="/maskot.png" style={{ width: 24, height: 24, objectFit: "cover" }} />
-      <div className={`${styles.typingBubble}`}>
-      <span className={`${styles.typingDot}`}></span>
-      <span className={`${styles.typingDot}`}></span>
-      <span className={`${styles.typingDot}`}></span>
-    </div>
-    </div>
-  )}
+            )}
           </div>
           <div className="mt-4">
             <Input
@@ -382,11 +319,11 @@ export function ChatInterface() {
           </div>
         </div>
         <div className="flex flex-col w-1/2 h-full bg-white rounded-lg shadow-md p-4 thinking-process" style={{maxHeight}}>
-  <div className="flex items-center mb-4">
-    <BotIcon className="h-6 w-6 text-gray-500 mr-2" />
-    <h2 className="text-lg font-semibold">AI Sales Agent {botName} Thought Process</h2>
-  </div>
-  <div className={`flex-1 overflow-y-auto hide-scroll ${styles.hideScrollbar}`} style={{ overflowX: 'hidden' }}>
+          <div className="flex items-center mb-4">
+            <BotIcon className="h-6 w-6 text-gray-500 mr-2" />
+            <h2 className="text-lg font-semibold">AI Sales Agent {botName} Thought Process</h2>
+          </div>
+          <div className={`flex-1 overflow-y-auto hide-scroll ${styles.hideScrollbar}`} style={{ overflowX: 'hidden' }}>
             <div>
               {thinkingProcess.map((process, index) => (
                 <div key={index} className="break-words my-2">
@@ -408,7 +345,8 @@ export function ChatInterface() {
               ))}
             </div>
             <div ref={thinkingProcessEndRef} />
-</div></div>
+          </div>
+        </div>
       </main>
     </div>
   );
